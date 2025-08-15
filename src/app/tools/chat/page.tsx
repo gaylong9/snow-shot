@@ -358,9 +358,13 @@ const Chat = () => {
                 return undefined;
             }
 
+            const baseUrl = new URL(
+                'chat/completions',
+                customConfig.api_uri.endsWith('/')? customConfig.api_uri: customConfig.api_uri + '/',
+            ).href;
             return {
                 request: XRequest({
-                    baseURL: path.join(customConfig.api_uri, '/chat/completions'),
+                    baseURL: baseUrl,
                     dangerouslyApiKey: `Bearer ${customConfig.api_key}`,
                     fetch: appFetch,
                 }),
